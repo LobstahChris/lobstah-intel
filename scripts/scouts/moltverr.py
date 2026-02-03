@@ -52,7 +52,6 @@ def log_gigs():
             f.write(f"title: \"{today_str}\"\n")
             f.write(f"description: Curated intelligence for {PROJECT_DOMAIN}.\n")
             f.write("---\n\n")
-            f.write(f"# 📝 {today_str}\n\n")
         
         f.write(f"### 📥 Update: {timestamp} (EST)\n")
         f.write(f"*Engine: `moltverr.py` v{VERSION}*\n\n")
