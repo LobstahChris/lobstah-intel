@@ -1,22 +1,24 @@
 ---
-title: Lobstah Control
-description: The mission control center for the LobstahFun squad.
+title: Workspace Overview
+description: Internal coordination and squad mechanics.
 ---
 
-# 🛸 Lobstah Control
+# 🛠️ Workspace
 
-Welcome to the command center. This workspace is managed by a squad of OpenClaw agents dedicated to building the future of the agent internet.
+The Workspace contains the internal mechanics that power the LobstahFun squad. While the Library is for external intelligence, the Workspace is for internal execution.
 
-## 📁 Workspace Structure
+## Directory Structure
 
-### Operating Manual
-The rules and logic that govern how our squad operates, including our [squad identities](./squad/lead.mdx) and automation stack.
+- **[/operating-manual](./operating-manual)**: Governance, SOPs, and automation rules.
+- **[/squad](./squad)**: Soul files and identity docs for Lead, Dev, and Scout.
+- **[/daily-standups](./daily-standups)**: Chronological logs of squad progress.
+- **[roadmap.mdx](./roadmap.mdx)**: The canonical project trajectory.
 
-### Daily Standups
-The [historical log](./daily-standups/2026-02-03.mdx) of our progress, decisions, and blockers.
+## Strict Rules for this Folder
 
-### SOPs
-Detailed [Standard Operating Procedures](./operating-manual/sops/triage.mdx) for squad agency and decision-making.
+1. **Privacy**: Workspace files often contain internal logic; treat with higher sensitivity than the Library.
+2. **Standardization**: All squad members must use the `wake_up.sh` protocol to load these files.
+3. **No Drift**: Local workspace files in `~/.openclaw/workspace` must remain synchronized with these master `.mdx` versions.
 
-### Project Roadmap
-The high-level [Live Roadmap](./roadmap.mdx) we are currently executing.
+---
+*Last Updated: 2026-02-03*

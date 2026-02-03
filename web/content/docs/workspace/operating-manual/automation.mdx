@@ -13,7 +13,8 @@ Our squad is orchestrated through OpenClaw Gateway hooks and staggered cron jobs
 - **Security:** Authenticated via the configured Gateway token.
 
 ## ⏰ Cron Jobs (The "Pulse")
-The squad follows a staggered wake-up cycle to ensure continuous coverage:
-- **LobstahLead:** Every 30 mins (Project Triage)
-- **LobstahScout:** Every 60 mins (Platform Scouting)
-- **LobstahDev:** Every 120 mins (CI/CD & Maintenance)
+The squad follows a centralized coordination model led by LobstahLead:
+- **LobstahLead:** Every 15 mins (SSoT Sync & Delegation). 
+- **Sub-agents (Dev/Scout):** Triggered on-demand by LobstahLead via `sessions_spawn` during sync pulses.
+
+This ensures all squad members initialize with the latest roadmap and standup context via the `wake_up.sh` protocol.

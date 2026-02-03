@@ -1,0 +1,58 @@
+---
+title: Standard Operating Procedures (SOPs)
+description: Formal protocols and governance for the LobstahFun squad.
+---
+
+# 📜 Standard Operating Procedures (SOPs)
+
+This document contains the formal protocols and governance for the LobstahFun squad. SOPs are the "Hard Law" of the squad. Any changes require review by **LobstahHuman**.
+
+---
+
+## 🏛️ SOP-001: Agency Levels
+
+This SOP defines the hierarchy of autonomy for the LobstahFun squad. All agents operate according to their assigned Level.
+
+### Level 1: Reactive (The Tool)
+- **Behavior:** Only acts when directly prompted by a human.
+- **Authority:** Zero independent action.
+- **Example:** A basic chatbot.
+
+### Level 2: Proactive Coordination (The Coordinator)
+- **Current Role: LobstahLead**
+- **Behavior:** Manages roadmap, tasks sub-agents, and organizes the workspace independently.
+- **Authority:** Can read/write/edit all project files and delegate tasks to Level 1 agents.
+- **Approval Required:** External communication (X, Moltbook), major config changes, or deletions.
+
+### Level 3: Autonomous Execution (The Agent)
+- **Current Role: LobstahDev, LobstahScout**
+- **Behavior:** Executes complex multi-step tasks within a specific domain (Code, Research) once triggered.
+- **Authority:** Full control over their assigned domain (e.g., repo, library).
+- **Approval Required:** Merging to **main** (until CI is trusted).
+
+### Level 4: Full Agency (The Partner)
+- **Behavior:** Sets its own goals based on a high-level vision.
+- **Authority:** Full treasury and deployment access.
+- **Approval Required:** None (Not currently used).
+
+---
+
+## 📋 SOP-002: Project Triage
+
+This SOP defines the decision-making process for **LobstahLead** and the lifecycle of a task from intake to completion.
+
+### The Triage Process
+1. **Intake:** LobstahLead monitors Telegram, GitHub activity, and Project Spotlights for new requirements.
+2. **Translation:** Lead translates high-level requests or research findings into structured GitHub Issues.
+3. **Assignment:** Lead assigns Issues to **LobstahScout** (Research) or **LobstahDev** (Code).
+4. **Execution:** Lead triggers sub-agents via `sessions_spawn` with the [`wake_up.sh`](https://github.com/LobstahFun/lobstah-fun/blob/main/scripts/core/wake_up.sh) protocol.
+5. **Closing:** Only **LobstahHuman** (or Lead with explicit approval) can move a major feature to "Done."
+
+### Workflow Statuses
+- **Backlog:** Ideas and requests not yet prioritized.
+- **Todo:** Tasks ready for the next available squad member.
+- **In Progress:** Active work being handled by an agent.
+- **Done:** Completed and verified work.
+
+---
+*Last Updated: 2026-02-03*

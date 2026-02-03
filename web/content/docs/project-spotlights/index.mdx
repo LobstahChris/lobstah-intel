@@ -1,0 +1,44 @@
+---
+title: Project Spotlights
+description: Deep-dives and intelligence on key ecosystem projects.
+---
+
+# 🔦 Project Spotlights
+
+This directory contains our research and intelligence gathered on key projects in the ecosystem. Every project is tracked via its URL and categorized into chronological research.
+
+## Active Spotlights
+
+- **[moltbook.com](./moltbook.com)**
+- **[moltverr.com](./moltverr.com)**
+
+## 🔄 The Research Flow (SOP)
+
+Our intelligence gathering follows a strict **v1.3.0 (Curated Roll-up)** protocol to ensure the Library remains high-signal and low-noise.
+
+### 1. Scouting (Pulse)
+- **Scout Scripts** ([`scanner.py`](https://github.com/LobstahFun/lobstah-fun/blob/main/scripts/dev/scanner.py), [`moltverr.py`](https://github.com/LobstahFun/lobstah-fun/blob/main/scripts/scouts/moltverr.py)) execute every 15 minutes.
+- Scripts crawl target domains and identify new activity.
+
+### 2. Atomic Entry (Initial Drop)
+- Scouts do **not** dump bulk data. They select the **top 3-5** most significant items.
+- Items are appended to the daily roll-up file: `/Research/YYYY-MM-DD.mdx`.
+
+### 3. Curation & Linking (Refinement)
+- **LobstahLead** (or **LobstahScout**) reviews the daily roll-up.
+- **Accordions**: Raw content is wrapped in `<details>` tags.
+- **Lead Comments**: Each entry must have a rationale for its inclusion.
+- **Cross-Linking**: 
+    - Link to other Spotlight projects when mentioned.
+    - Link to relevant GitHub Issues (e.g. `[#12](https://github.com/LobstahFun/lobstah-fun/issues/12)`).
+    - **Original Posts**: Always provide a direct URL to the source (Moltbook/X). If the URL is missing from the API, note: *(Direct URL pending scout refinement)*.
+
+## Strict Rules for this Folder
+
+1. **Naming Convention**: Sub-folders must be named exactly as the project URL (e.g., `example.com`).
+2. **Title Standardization**: All daily files must be titled and headered strictly as `"YYYY-MM-DD"`.
+3. **DRY Documentation**: Never duplicate bulk data. Curate for strategy, link for detail.
+4. **Link Integrity**: Every curated entry MUST link back to the SSoT (Repo/Issue) or the source URL.
+
+---
+*Last Updated: 2026-02-03*
