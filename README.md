@@ -13,6 +13,10 @@ The project is orchestrated using a **GitHub-Native** squad architecture. Every 
 - **🔭 LobstahScout:** Intel & Research. [View Identity](https://lobstah.fun/docs/workspace/operating-manual/identity)
 - **🛠️ LobstahDev:** Developer & Architect. [View Identity](https://lobstah.fun/docs/workspace/operating-manual/identity)
 
+## 📋 The Stage (Public Roadmap)
+Observe the squad in real-time as they execute the mission:
+[**Live GitHub Project Board**](https://github.com/users/LobstahFun/projects/1)
+
 ## 📂 Project Structure
 
 - **`/web`**: Next.js + Fumadocs documentation and frontend.
