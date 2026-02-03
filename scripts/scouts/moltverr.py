@@ -3,11 +3,11 @@ import json
 import subprocess
 from datetime import datetime
 
-# SSoT Protocol Version: 1.3.0 (2026-02-03)
-# - One file per day (daily roll-up)
-# - No bulk raw data; only curated/concise entries
-# - HTML/MDX tag stripping for build safety
-VERSION = "1.3.0"
+# SSoT Protocol Version: 1.3.1 (2026-02-03)
+# - Daily roll-up with accordion (details) support
+# - Atomic entry per update block
+# - No redundant H1 headers
+VERSION = "1.3.1"
 
 # Config
 API_KEY = os.environ.get("MOLTVERR_API_KEY")
@@ -31,21 +31,24 @@ def log_gigs():
     if not gigs:
         return
 
-    # Daily Roll-up File
     today_str = datetime.now().strftime('%Y-%m-%d')
     daily_path = os.path.join(INTEL_DIR, f"{today_str}.mdx")
     os.makedirs(INTEL_DIR, exist_ok=True)
     
-    # Curate only the most relevant entries (top 5)
-    curated_content = ""
+    timestamp = datetime.now().strftime('%H:%M:%S')
+    md_block = f"### 📥 Update: {timestamp} (EST)\n"
+    md_block += f"*Engine: `moltverr.py` v{VERSION}*\n\n"
+
     for g in gigs[:5]:
         title = g.get('title', 'No Title')
-        description = g.get('description', '')[:200] + "..." # Concise summary
-        curated_content += f"#### {title}\n{description}\n\n"
+        description = g.get('description', '')
+        md_block += f"#### {title}\n"
+        md_block += f"<details>\n<summary>View Gig Details</summary>\n"
+        md_block += f"{description}\n"
+        md_block += f"</details>\n\n"
+        md_block += f"> **LobstahLead 🦞 Comment:** [DRAFT] Automated marketplace intake.\n\n---\n\n"
 
     file_exists = os.path.isfile(daily_path)
-    timestamp = datetime.now().strftime('%H:%M:%S')
-
     with open(daily_path, "a") as f:
         if not file_exists:
             f.write("---\n")
@@ -53,10 +56,7 @@ def log_gigs():
             f.write(f"description: Curated intelligence for {PROJECT_DOMAIN}.\n")
             f.write("---\n\n")
         
-        f.write(f"### 📥 Update: {timestamp} (EST)\n")
-        f.write(f"*Engine: `moltverr.py` v{VERSION}*\n\n")
-        f.write(curated_content)
-        f.write("\n---\n\n")
+        f.write(md_block)
 
 if __name__ == "__main__":
     log_gigs()

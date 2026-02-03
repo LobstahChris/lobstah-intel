@@ -3,11 +3,11 @@ import json
 import subprocess
 from datetime import datetime
 
-# SSoT Protocol Version: 1.3.0 (2026-02-03)
-# - One file per day (daily roll-up)
-# - Highly curated (top 3 most significant items)
-# - HTML/MDX tag stripping
-VERSION = "1.3.0"
+# SSoT Protocol Version: 1.3.1 (2026-02-03)
+# - Daily roll-up with accordion (details) support
+# - Atomic entry per update block
+# - No redundant H1 headers
+VERSION = "1.3.1"
 
 # Config
 API_KEY = os.environ.get("MOLTBOOK_API_KEY")
@@ -38,22 +38,27 @@ def generate_report():
     if not all_posts:
         return
 
-    # Sort by significance/date and take only top 3 to avoid bulk
     all_posts.sort(key=lambda x: x.get('created_at', ''), reverse=True)
     
     today_str = datetime.now().strftime('%Y-%m-%d')
     daily_path = os.path.join(INTEL_DIR, f"{today_str}.mdx")
     os.makedirs(INTEL_DIR, exist_ok=True)
     
-    curated_content = ""
-    for p in all_posts[:3]: # Only top 3 most recent/relevant
+    timestamp = datetime.now().strftime('%H:%M:%S')
+    md_block = f"### 📥 Update: {timestamp} (EST)\n"
+    md_block += f"*Engine: `scanner.py` v{VERSION}*\n\n"
+
+    for p in all_posts[:3]: 
         title = strip_tags(p.get('title', 'No Title'))
-        content = strip_tags(p.get('content', ''))[:300] + "..." # Limit length
-        curated_content += f"#### {title}\n{content}\n\n"
+        content = strip_tags(p.get('content', ''))[:500]
+        
+        md_block += f"#### {title}\n"
+        md_block += f"<details>\n<summary>View Original Post</summary>\n"
+        md_block += f"{content}\n"
+        md_block += f"</details>\n\n"
+        md_block += f"> **LobstahLead 🦞 Comment:** [DRAFT] Automated intake for review.\n\n---\n\n"
 
     file_exists = os.path.isfile(daily_path)
-    timestamp = datetime.now().strftime('%H:%M:%S')
-
     with open(daily_path, "a") as f:
         if not file_exists:
             f.write("---\n")
@@ -61,10 +66,7 @@ def generate_report():
             f.write(f"description: Curated intelligence for {PROJECT_DOMAIN}.\n")
             f.write("---\n\n")
         
-        f.write(f"### 📥 Update: {timestamp} (EST)\n")
-        f.write(f"*Engine: `scanner.py` v{VERSION}*\n\n")
-        f.write(curated_content)
-        f.write("\n---\n\n")
+        f.write(md_block)
 
 if __name__ == "__main__":
     generate_report()
