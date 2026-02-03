@@ -68,9 +68,17 @@ def generate_report():
 
     # Write to daily research log (Persistent history)
     daily_path = os.path.join(INTEL_DIR, "platforms", "moltbook.com", "research", f"{datetime.now().strftime('%Y-%m-%d')}.mdx")
+    
+    # Ensure directory exists
+    os.makedirs(os.path.dirname(daily_path), exist_ok=True)
+    
     with open(daily_path, "a") as f:
         f.write(f"\n\n## Update: {datetime.now().strftime('%H:%M:%S')}\n")
         f.write(md)
+
+    # NEW: Also update the project spotlight index if relevant projects are found
+    # This is a stub for future auto-curation logic
+    print("Injected intelligence into daily research logs.")
 
 if __name__ == "__main__":
     generate_report()
