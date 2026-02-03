@@ -68,10 +68,12 @@ def generate_report():
 
     # Write to daily research log (Persistent history)
     today_str = datetime.now().strftime('%Y-%m-%d')
-    daily_path = os.path.join(INTEL_DIR, "platforms", "moltbook.com", "research", f"{today_str}.mdx")
+    # Updated to flat platform-first structure
+    platform_dir = os.path.join(INTEL_DIR, "moltbook.com")
+    daily_path = os.path.join(platform_dir, f"{today_str}.mdx")
     
     # Ensure directory exists
-    os.makedirs(os.path.dirname(daily_path), exist_ok=True)
+    os.makedirs(platform_dir, exist_ok=True)
 
     # Initialize file with metadata if it doesn't exist
     if not os.path.exists(daily_path):
